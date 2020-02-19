@@ -1,6 +1,6 @@
 # UestraTV
 
-A quick attempt at hosting my own Üstra Fahrgastfernsehn.
+A quick attempt at hosting my own Üstra Fahrgastfernsehen.
 
 ## Motivation
 
