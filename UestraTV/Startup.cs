@@ -4,12 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
+using BlazorStrap;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using UestraTV.Data;
+using UestraTV.Services;
+using System.Net.Http;
+using Microsoft.AspNetCore.SignalR.Client;
 
 namespace UestraTV
 {
@@ -28,7 +32,16 @@ namespace UestraTV
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.Configure<ServiceOptions>(Configuration);
             services.AddSingleton<BroadcastService>();
+            services.AddTransient<HubConnectionBuilder>();
+            services.AddSingleton<UpdateHub>();
+            services.AddSignalR();
+
+            services.AddHostedService<ConsumeScopedServiceHostedService>();
+            services.AddScoped<IScopedProcessingService, ScopedProcessingService>();
+
+            services.AddBootstrapCSS();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,7 +58,7 @@ namespace UestraTV
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -53,6 +66,7 @@ namespace UestraTV
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapBlazorHub();
+                endpoints.MapHub<UpdateHub>("/update");
                 endpoints.MapFallbackToPage("/_Host");
             });
         }

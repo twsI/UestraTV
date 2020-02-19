@@ -16,7 +16,7 @@ namespace UestraTV.Data
         private string thumbnail = "https://www.publicbroadcast.de/art/thumbnails/{0}/{1}/{2}{3}";
         private string fullsize = "https://www.publicbroadcast.de/art/fullsize_akt/{0}/{1}/{2}{3}";
 
-        public async Task<Broadcast[]> GetBroadcastAsync(ProgramWeekday day = ProgramWeekday.Today)
+        public async Task<List<Broadcast>> GetBroadcastAsync(ProgramWeekday day = ProgramWeekday.Today)
         {
             int dateOffset = (int)day;
             using var client = new HttpClient();
@@ -38,7 +38,7 @@ namespace UestraTV.Data
                 };
                 list.Add(bd);
             }
-            return list.ToArray();
+            return list;
         }
     }
 }

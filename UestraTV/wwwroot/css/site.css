@@ -1,14 +1,24 @@
-@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
-
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .carousel {
+    height: 100vh;
+    width: 100%;
     background-color: black;
 }
 
-img {
-    max-height: 100vh;
-    object-fit: contain;
-}
+    .carousel .carousel-inner {
+        height: 100%;
+    }
+
+    .carousel .carousel-item {
+        height: 100%;
+        transition: transform .3s ease-in-out, opacity .25s ease-out;
+    }
+
+        .carousel .carousel-item img {
+            width: auto !important;
+            margin: auto;
+            height: 100%;
+        }
