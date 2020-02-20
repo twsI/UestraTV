@@ -45,7 +45,7 @@ else
         if (Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true")
         {
             // Workaround for docker
-            uri = new Uri("https://localhost:443/update");
+            uri = new Uri("https://127.0.0.1:443/update");
             configureHttpConnection = (opts) =>
             {
                 opts.HttpMessageHandlerFactory = (message) =>
@@ -53,7 +53,7 @@ else
                     if (message is HttpClientHandler clientHandler)
                     // bypass SSL certificate
                     clientHandler.ServerCertificateCustomValidationCallback +=
-                                        (sender, certificate, chain, sslPolicyErrors) => { return true; };
+                                            (sender, certificate, chain, sslPolicyErrors) => { return true; };
                     return message;
                 };
             };
@@ -72,11 +72,11 @@ else
             {
                 broadcasts.Clear();
                 numberOfItems = -1; // hacky workaround to clear the carousel items
-                await InvokeAsync(StateHasChanged).ConfigureAwait(false);
+            await InvokeAsync(StateHasChanged).ConfigureAwait(false);
 
                 broadcasts = payload;
                 numberOfItems = broadcasts.Count;
-                
+
                 await InvokeAsync(StateHasChanged).ConfigureAwait(false);
             }
         });
