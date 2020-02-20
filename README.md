@@ -1,5 +1,7 @@
 # UestraTV
 
+[![Docker Pulls](https://img.shields.io/docker/pulls/twsldev/uestra-fahrgastfernsehen)](https://hub.docker.com/r/twsldev/uestra-fahrgastfernsehen)
+
 A quick attempt at hosting my own Üstra Fahrgastfernsehen with Blazor.
 
 ## Motivation
